@@ -8,7 +8,7 @@ class PipelineSingleton {
 
     static async getInstance(progress_callback?: any) {
         if (this.instance === null) {
-            this.instance = await pipeline(this.task, this.model, { progress_callback });
+            this.instance = await pipeline(this.task as any, this.model, { progress_callback });
         }
         return this.instance;
     }
