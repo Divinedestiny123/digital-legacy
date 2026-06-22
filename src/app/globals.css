@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #02000e; /* Deep Space Black */
+  --color-foreground: #f8fafc;
+  --color-primary: #1e1b4b; /* Deep Indigo */
+  --color-primary-foreground: #f8fafc;
+  --color-muted: #1e293b; /* Slate 800 */
+  --color-muted-foreground: #94a3b8; /* Slate 400 */
+  --color-accent: #6366f1; /* Indigo 500 */
+  --color-accent-foreground: #ffffff;
+  --color-border: #1e293b; /* Slate 800 */
+  
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+@keyframes liquid-pan {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 100%; }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Liquid Mesh Gradient */
+  .liquid-mesh {
+    background: 
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.4) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.4) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.4) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.4) 0px, transparent 50%);
+    background-size: 200% 200%;
+    animation: liquid-pan 15s ease infinite alternate;
+  }
+}
