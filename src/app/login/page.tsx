@@ -29,7 +29,12 @@ export default function LoginPage() {
       if (error) throw error;
       setStep("OTP");
     } catch (err: any) {
-      setError(err.message || "Failed to send code.");
+      console.error("OTP Error:", err);
+      let errMsg = err.message || "Failed to send code.";
+      if (errMsg === "{}" || err.status === 500) {
+        errMsg = "Authentication server error. The database trigger might have failed or the email rate limit was exceeded.";
+      }
+      setError(errMsg);
     } finally {
       setIsLoading(false);
     }
@@ -52,7 +57,12 @@ export default function LoginPage() {
         router.push("/dashboard");
       }
     } catch (err: any) {
-      setError(err.message || "Invalid code.");
+      console.error("Verify OTP Error:", err);
+      let errMsg = err.message || "Invalid code.";
+      if (errMsg === "{}" || err.status === 500) {
+        errMsg = "Authentication server error during verification.";
+      }
+      setError(errMsg);
     } finally {
       setIsLoading(false);
     }
