@@ -19,7 +19,8 @@ export async function GET(req: Request) {
     .single();
 
   if (error && error.code !== "PGRST116") { // PGRST116 is no rows returned
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    const errorMessage = error?.message || "An unexpected database error occurred";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 
   if (data) {

@@ -26,6 +26,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ user_id: data });
   } catch (error: any) {
     console.error("Lookup error:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    const errorMessage = error?.message || (typeof error === 'string' ? error : "An unexpected server error occurred during lookup");
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

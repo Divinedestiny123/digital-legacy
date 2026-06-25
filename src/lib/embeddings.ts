@@ -1,4 +1,7 @@
-import { pipeline } from '@xenova/transformers';
+import { pipeline, env } from '@xenova/transformers';
+
+// Important for Vercel serverless compatibility: prevents it from trying to write/read local cache
+env.allowLocalModels = false;
 
 // This is a singleton pattern to ensure the model is only loaded once in the Node process
 class PipelineSingleton {

@@ -31,16 +31,10 @@ async function main() {
 
   console.log(`Checking ledger account for ${wallet.address}...`);
   try {
-    const depositAmount = 2.5; // Ledger SDK expects `number` for depositFund (representing A0GI)
-    console.log(`Depositing 2.5 A0GI into LedgerManager to create/fund the ledger account...`);
-    await broker.ledger.depositFund(depositAmount);
-    console.log("Successfully deposited into Ledger account!");
-
     const transferAmount = ethers.parseEther("1.0"); // Ledger SDK expects `bigint` for transferFund (representing wei)
     console.log(`Transferring 1.0 A0GI from Ledger to Inference sub-account for provider ${providerAddress}...`);
     await broker.ledger.transferFund(providerAddress, "inference", transferAmount);
     console.log("Successfully transferred funds to Inference Provider sub-account! You can now use the AI Chat.");
-    
   } catch (error) {
     console.error("Error setting up accounts:", error.reason || error.message || error);
   }
