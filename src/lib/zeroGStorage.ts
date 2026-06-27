@@ -2,7 +2,7 @@ import { Indexer } from "@0gfoundation/0g-storage-ts-sdk";
 import { ethers } from "ethers";
 
 // Fallback logic for hackathon demonstration if node connection fails
-const STORAGE_RPC = "https://rpc-storage-testnet.0g.ai";
+const STORAGE_RPC = "https://indexer-storage-testnet-turbo.0g.ai";
 
 export const uploadTo0GStorage = async (fileBlob: Blob): Promise<string> => {
   try {

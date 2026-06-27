@@ -6,7 +6,7 @@ import os from "os";
 import path from "path";
 
 // Define the 0G Storage testnet RPC
-const STORAGE_RPC = "https://rpc-storage-testnet.0g.ai";
+const STORAGE_RPC = "https://indexer-storage-testnet-turbo.0g.ai";
 const EVM_RPC = "https://evmrpc-testnet.0g.ai";
 
 export async function POST(req: Request) {
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
     let zgFile: ZgFile | null = null;
     try {
       zgFile = await ZgFile.fromFilePath(tempFilePath);
-      const [res, err] = await indexer.upload(zgFile, EVM_RPC, wallet);
+      const [res, err] = await indexer.upload(zgFile, EVM_RPC, wallet, { finalityRequired: false });
       
       if (err) {
         throw err;
